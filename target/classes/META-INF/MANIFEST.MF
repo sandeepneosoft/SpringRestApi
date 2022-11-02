@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: SANDEEP RAWAT
+Build-Jdk: 16.0.2
+Implementation-Title: SpringRestApi
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.example.app
+Implementation-URL: https://spring.io/projects/spring-boot/SpringRestApi
+Created-By: Maven Integration for Eclipse
+
