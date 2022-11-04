@@ -27,13 +27,12 @@ public class UserController {
 	
 	@PostMapping("/register-new-user")
 	public void registerNewUser(@RequestBody User user) {
-		logger.info("Request Payload {}", user);
 		userService.registerNewUser(user);
 	}
 	
 	@PutMapping("/edit-user/{id}")
 	public boolean editUserById(@PathVariable("id") Long id, @RequestBody User user) throws ParseException {
-		logger.info("editing user with {}", id, " and user {}", user);
+		logger.info("editing user with {}",id);
 		boolean flag = userService.editUserById(id, user);
 		logger.info("edit done with flag {}", flag);
 		return flag;
@@ -43,7 +42,7 @@ public class UserController {
 	public User searchUserByPincode(@PathVariable("pincode") int pincode) {
 		logger.info("searching user pincode {}", pincode);
 		User user = userService.searchUserByPincode(pincode);
-		logger.info("user found {}", user);
+		logger.info("user found {}", user.getId());
 		return user;
 	}
 	

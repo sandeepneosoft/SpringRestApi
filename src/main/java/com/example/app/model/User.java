@@ -23,10 +23,8 @@ public class User {
 	private String name;
 	private String surname;
 	
-	@NotNull
 	private String dob;
 	
-	@NotNull
 	private String joiningDate;
 	
 	private int pincode;
@@ -52,20 +50,14 @@ public class User {
 	public String getDob() {
 		return dob;
 	}
-	public void setDob(String dob) throws ParseException {
-		SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
-		Date formattedDate = format.parse(dob);
-		java.sql.Date dateDB = new java.sql.Date(formattedDate.getTime());
-		this.dob = dateDB.toString();
+	public void setDob(String dob) {
+		this.dob = dob;
 	}
 	public String getJoiningDate() {
 		return joiningDate;
 	}
-	public void setJoiningDate(String joiningDate) throws ParseException {
-		SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
-		Date formattedDate = format.parse(joiningDate);
-		java.sql.Date dateDB = new java.sql.Date(formattedDate.getTime());
-		this.joiningDate = dateDB.toString();
+	public void setJoiningDate(String joiningDate) {
+		this.joiningDate = joiningDate;
 	}
 	public int getPincode() {
 		return pincode;

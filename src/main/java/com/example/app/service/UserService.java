@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.app.model.User;
 import com.example.app.repository.UserRepository;
+import com.example.app.util.CommonUtil;
 
 @Service
 public class UserService {
@@ -22,28 +23,29 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private CommonUtil commonUtil;
+	
 	public void registerNewUser(User user) {
-		logger.debug("{}", user);
 		User savedUser = userRepository.save(user);
 		logger.info(savedUser == user ? "new user saved" : "not saved");
 	}
 	
 	public boolean editUserById(Long id, User user) throws ParseException {
-		logger.debug("ID {}", id, " of user {}", user);
+		logger.debug("ID {}", id);
 		Optional<User> found = userRepository.findById(id);
 		if(found.isPresent()) {
 			User foundUser = found.get();
 			logger.info("user matched with given ID {}", id);
-			User updatedUser = new User();
-			updatedUser.setId(foundUser.getId());
-			updatedUser.setName(foundUser.getSurname());
-			updatedUser.setSurname(foundUser.getSurname());
-			updatedUser.setDob(foundUser.getDob());
-			updatedUser.setJoiningDate(foundUser.getJoiningDate());
-			updatedUser.setPincode(foundUser.getPincode());
+			foundUser.setId(user.getId());
+			foundUser.setName(user.getName());
+			foundUser.setSurname(user.getSurname());
+			foundUser.setDob(commonUtil.convertFormatDate(user.getDob()));
+			foundUser.setJoiningDate(commonUtil.convertFormatDate(user.getJoiningDate()));
+			foundUser.setPincode(user.getPincode());
 			
-			User saved = userRepository.save(updatedUser);
-			logger.info(saved == updatedUser ? "existing user updated with " + id + "." : "not updated");
+			User saved = userRepository.save(foundUser);
+			logger.info(saved == foundUser ? "existing user updated with " + id + "." : "not updated");
 			if(saved != null)
 				return true;
 		} 
